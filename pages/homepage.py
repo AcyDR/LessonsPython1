@@ -18,6 +18,6 @@ class HomePage:
         monitor_link = self.driver.find_element(By.CSS_SELECTOR, '''[onclick="byCat('monitor')"]''')
         monitor_link.click()
 
-    def check_product_count(self):
+    def check_product_count(self, count):
         monitors = self.driver.find_elements(By.CSS_SELECTOR, '.card')
         assert len(monitors) == count  # с помощью функции len узнаем количество элементов в списке monitors, а len(monitors) ==2 проверяет что, количество мониторов равно двум
