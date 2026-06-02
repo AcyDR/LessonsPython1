@@ -1,15 +1,19 @@
+from itertools import product
+
 from selenium import webdriver #импорт селениума
 from selenium.webdriver.common.by import By #импорт способов поисков по элементу
 import pytest
 import time
+from pages.homepage import  HomePage # для того что бы использовались файлы из нашей инструкции
+from pages.product import ProductPage # для того что бы использовались файлы из нашей инструкции
 
 # Открытие сайта - открыть новую страницу - кликнуть по ссылке - проверка страницы на соответствие тексту
 def test_open_s6(driver):
-    driver.get('https://demoblaze.com/index.html') # переход на нужную страницу браузера c помощью команды get
-    galaxy_s6 = driver.find_element(By.XPATH,'//a[text() = "Samsung galaxy s6"]') # поиск елемента на странице (данные можно взять из devTool) и создание в переменную galaxy_s6 поиск по ссылке и тексту в ней XPATH
-    galaxy_s6.click()
-    title = driver.find_element(By.CSS_SELECTOR, 'h2')
-    assert title.text == 'Samsung galaxy s6'
+    homepage = HomePage(driver)
+    homepage.open()
+    homepage.click_galaxy_s6()
+    product_page = ProductPage(driver)
+    product_page.check_title_is('Samsung galaxy s6')
 
 # Открытие сайта - из списка кликнуть на мониторы - и убедиться что на странице отображается 2 товара
 def test_two_monitors(driver):
